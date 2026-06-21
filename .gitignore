@@ -1,0 +1,5 @@
+*.err
+*.out
+.server.pid
+node_modules/
+.vercel/

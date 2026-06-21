@@ -1,0 +1,17 @@
+{
+  "name": "consent-hound-demo",
+  "version": "1.0.0",
+  "description": "Consent-first hackathon demo for chat and browser-approved location sharing.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "hackathon",
+    "consent",
+    "geolocation",
+    "chat"
+  ],
+  "author": "",
+  "license": "MIT"
+}

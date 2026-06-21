@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hackathon Consent Chat</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="participant-shell">
+      <section class="panel">
+        <p class="eyebrow">Authorized Hackathon Demo</p>
+        <h1>Consent Chat</h1>
+        <p class="lede">This authorized demo will ask your browser for location permission when the page opens. If you deny the prompt, no location is sent. Messages you type here appear on the organizer dashboard.</p>
+        <p class="status-pill" id="locationStatus">Preparing location permission request</p>
+      </section>
+
+      <section class="panel chat-panel">
+        <div class="chat-log" id="chatLog">
+          <div class="bubble system">The browser location prompt will appear automatically. You can deny it and still use chat.</div>
+        </div>
+
+        <form class="composer" id="chatForm">
+          <input id="message" maxlength="1000" placeholder="Type a message" autocomplete="off">
+          <button id="sendMessage" type="submit">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/participant.js"></script>
+  </body>
+</html>

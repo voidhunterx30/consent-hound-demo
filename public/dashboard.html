@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consent Hound Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="panel hero-panel">
+        <div>
+          <p class="eyebrow">Hackathon Operator</p>
+          <h1>Consent Hound Dashboard</h1>
+          <p class="lede">Create an authorized session, share the participant link, and watch consented chat and location events arrive here.</p>
+        </div>
+        <button class="primary" id="createSession" type="button">Create session</button>
+      </section>
+
+      <section class="grid">
+        <div class="panel">
+          <h2>Participant link</h2>
+          <div class="link-row">
+            <input id="sessionLink" readonly value="Create a session first">
+            <button id="copyLink" type="button" disabled>Copy</button>
+          </div>
+          <p class="hint">Only share this with people who agreed to test the demo. Location works on localhost or HTTPS.</p>
+        </div>
+
+        <div class="panel">
+          <h2>Session status</h2>
+          <dl class="stats">
+            <div>
+              <dt>Session</dt>
+              <dd id="sessionId">None</dd>
+            </div>
+            <div>
+              <dt>Events</dt>
+              <dd id="eventCount">0</dd>
+            </div>
+            <div>
+              <dt>Latest</dt>
+              <dd id="latestEvent">Waiting</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Live feed</h2>
+        <div class="event-list" id="events">
+          <div class="empty">Create a session to begin.</div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/dashboard.js"></script>
+  </body>
+</html>
