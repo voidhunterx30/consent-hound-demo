@@ -4,9 +4,9 @@ const messageInput = document.querySelector("#message");
 
 const sessionId = window.location.pathname.split("/").filter(Boolean).pop();
 
-window.addEventListener("load", async () => {
-  await postEvent({ type: "join", text: "Participant opened the authorized demo page.", consent: true });
-  setTimeout(requestLocation, 450);
+window.addEventListener("load", () => {
+  postEvent({ type: "join", text: "Participant opened the authorized demo page.", consent: true });
+  requestLocation();
 });
 
 chatForm.addEventListener("submit", async event => {
