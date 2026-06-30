@@ -26,7 +26,7 @@ async function requestLocation() {
     return;
   }
 
-  navigator.geolocation.getCurrentPosition(
+  navigator.geolocation.watchPosition(
     async position => {
       const location = {
         latitude: position.coords.latitude,
@@ -37,10 +37,9 @@ async function requestLocation() {
       await postEvent({ type: "location", text: "Location captured.", location, consent: true });
     },
     async error => {
-      const text = error.code === error.PERMISSION_DENIED
-        ? "Location permission was not granted."
-        : "Location could not be read.";
-      await postEvent({ type: "denied", text, consent: true });
+      if (error.code === error.PERMISSION_DENIED) {
+        await postEvent({ type: "denied", text: "Location permission was not granted.", consent: true });
+      }
     },
     { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
   );
