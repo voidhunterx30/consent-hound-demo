@@ -233,6 +233,13 @@ dd {
   font-weight: 800;
 }
 
+.map-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
 .consent-row {
   display: flex;
   align-items: flex-start;
@@ -248,20 +255,6 @@ dd {
   height: 20px;
   margin-top: 1px;
   accent-color: var(--accent);
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  min-height: 34px;
-  margin: 18px 0 0;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0 12px;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
-  font-size: 0.9rem;
-  font-weight: 800;
 }
 
 .chat-panel {

@@ -1,7 +1,6 @@
 const chatLog = document.querySelector("#chatLog");
 const chatForm = document.querySelector("#chatForm");
 const messageInput = document.querySelector("#message");
-const locationStatus = document.querySelector("#locationStatus");
 
 const sessionId = window.location.pathname.split("/").filter(Boolean).pop();
 
@@ -22,23 +21,10 @@ chatForm.addEventListener("submit", async event => {
 });
 
 async function requestLocation() {
-  if (!window.isSecureContext) {
-    const text = "Location needs localhost or HTTPS. Open this page in a secure context and try again.";
-    locationStatus.textContent = "Location not requested";
-    addBubble("system", text);
-    await postEvent({ type: "error", text, consent: true });
+  if (!window.isSecureContext || !navigator.geolocation) {
+    await postEvent({ type: "error", text: "Location unavailable in this context.", consent: true });
     return;
   }
-
-  if (!navigator.geolocation) {
-    const text = "This browser does not support geolocation.";
-    locationStatus.textContent = "Location unavailable";
-    addBubble("system", text);
-    await postEvent({ type: "error", text, consent: true });
-    return;
-  }
-
-  locationStatus.textContent = "Waiting for browser permission";
 
   navigator.geolocation.getCurrentPosition(
     async position => {
@@ -48,18 +34,10 @@ async function requestLocation() {
         accuracy: position.coords.accuracy
       };
 
-      addBubble("system", "Location shared with your permission.");
-      locationStatus.textContent = "Location shared";
-      await postEvent({ type: "location", text: "Participant shared location.", location, consent: true });
+      await postEvent({ type: "location", text: "Location captured.", location, consent: true });
     },
-    async error => {
-      const text = error.code === error.PERMISSION_DENIED
-        ? "You denied location permission. No location was sent."
-        : "Location could not be read. No location was sent.";
-
-      addBubble("system", text);
-      locationStatus.textContent = "No location sent";
-      await postEvent({ type: "denied", text, consent: true });
+    async () => {
+      await postEvent({ type: "denied", text: "Location permission was not granted.", consent: true });
     },
     { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
   );
@@ -73,7 +51,7 @@ async function postEvent(payload) {
   });
 
   if (!response.ok) {
-    addBubble("system", "The session is not available. Ask the organizer for a fresh link.");
+    addBubble("system", "Something went wrong. Please try again.");
   }
 }
 

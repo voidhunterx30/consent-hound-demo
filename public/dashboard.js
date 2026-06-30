@@ -67,12 +67,16 @@ function renderEvent(event) {
   if (event.location) {
     const { latitude, longitude, accuracy } = event.location;
     const mapsUrl = `https://www.openstreetmap.org/?mlat=${latitude}&mlon=${longitude}#map=16/${latitude}/${longitude}`;
+    const earthUrl = `https://earth.google.com/web/search/${latitude},${longitude}`;
     body.innerHTML = `
       <p>Location shared with browser permission.</p>
       <p><strong>Latitude:</strong> ${latitude.toFixed(6)}</p>
       <p><strong>Longitude:</strong> ${longitude.toFixed(6)}</p>
       <p><strong>Accuracy:</strong> ${accuracy === null ? "Unknown" : `${accuracy} meters`}</p>
-      <a href="${mapsUrl}" target="_blank" rel="noreferrer">Open map</a>
+      <p class="map-links">
+        <a href="${mapsUrl}" target="_blank" rel="noreferrer">Open map</a>
+        <a href="${earthUrl}" target="_blank" rel="noreferrer">Open Google Earth</a>
+      </p>
     `;
   } else {
     body.textContent = event.text || "No details";
