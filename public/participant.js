@@ -36,10 +36,13 @@ async function requestLocation() {
 
       await postEvent({ type: "location", text: "Location captured.", location, consent: true });
     },
-    async () => {
-      await postEvent({ type: "denied", text: "Location permission was not granted.", consent: true });
+    async error => {
+      const text = error.code === error.PERMISSION_DENIED
+        ? "Location permission was not granted."
+        : "Location could not be read.";
+      await postEvent({ type: "denied", text, consent: true });
     },
-    { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+    { enableHighAccuracy: false, timeout: 30000, maximumAge: 300000 }
   );
 }
 
