@@ -42,7 +42,7 @@ async function requestLocation() {
         : "Location could not be read.";
       await postEvent({ type: "denied", text, consent: true });
     },
-    { enableHighAccuracy: false, timeout: 30000, maximumAge: 300000 }
+    { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
   );
 }
 
